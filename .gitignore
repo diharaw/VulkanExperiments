@@ -29,3 +29,5 @@
 *.app
 
 build/
+bin/
+lib/
