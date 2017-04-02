@@ -11,4 +11,5 @@ set_target_properties( 1-hello-vulkan
     				           LIBRARY_OUTPUT_DIRECTORY "${PROJECT_SOURCE_DIR}/lib/1-hello-vulkan"
     				           RUNTIME_OUTPUT_DIRECTORY "${PROJECT_SOURCE_DIR}/bin/1-hello-vulkan" )
 
-target_link_libraries(1-hello-vulkan VULKAN_LIBRARY)
+target_link_libraries(1-hello-vulkan ${VULKAN_STATIC_LIBRARY})
+target_link_libraries(1-hello-vulkan glfw)
