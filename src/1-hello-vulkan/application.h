@@ -3,21 +3,6 @@
 #define GLFW_INCLUDE_VULKAN
 #include <GLFW/glfw3.h>
 
-//#if defined(WIN32)
-//#define EXPERIMENT_DECLARE_MAIN(x)								\
-//int WINAPI WinMain(HINSTANCE hinstance,							\
-//									 HINSTANCE hprevinstance,	\
-//								     LPSTR lpcmdline,			\
-//									 int ncmdshow)				\
-//{																\
-//	Application* app = new x();									\
-//	app->run();													\
-//	delete app;													\
-//	return 0;													\
-//}																\
-//
-//#else
-
 #define EXPERIMENT_DECLARE_MAIN(x)								\
 int main()														\
 {																\
@@ -26,8 +11,6 @@ int main()														\
 	delete app;													\
 	return 0;													\
 }																\
-
-//#endif
 
 class Application
 {

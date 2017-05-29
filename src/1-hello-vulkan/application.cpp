@@ -1,5 +1,6 @@
 #include "application.h"
 #include "const.h"
+#include "vulkan_backend.h"
 
 bool Application::keys[1024];
 bool Application::mouse[5];
@@ -27,14 +28,15 @@ bool Application::init_internal()
 	glfwSetCursorPosCallback(_window, mouse_callback);
 	glfwSetScrollCallback(_window, scroll_callback);
 
-	if (_window)
-		return true;
-	else
+	if (!_window)
 		return false;
+
+	return vulkan_backend::initialize();
 }
 
 void Application::shutdown_internal()
 {
+	vulkan_backend::shutdown();
 	glfwDestroyWindow(_window);
 	glfwTerminate();
 }
