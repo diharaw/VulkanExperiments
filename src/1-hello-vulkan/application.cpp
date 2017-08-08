@@ -5,6 +5,11 @@
 bool Application::keys[1024];
 bool Application::mouse[5];
 
+static void window_resize_callback(GLFWwindow* window, int width, int height) {
+	if (width == 0 || height == 0) return;
+	vulkan_backend::recreate_swap_chain();
+}
+
 Application::Application()
 {
 
@@ -20,18 +25,19 @@ bool Application::init_internal()
 	glfwInit();
 
 	glfwWindowHint(GLFW_CLIENT_API, GLFW_NO_API);
-	glfwWindowHint(GLFW_RESIZABLE, GLFW_FALSE);
+	glfwWindowHint(GLFW_RESIZABLE, GLFW_TRUE);
 
 	_window = glfwCreateWindow(WINDOW_WIDTH, WINDOW_HEIGHT, WINDOW_TITLE, nullptr, nullptr);
 
 	glfwSetKeyCallback(_window, key_callback);
 	glfwSetCursorPosCallback(_window, mouse_callback);
 	glfwSetScrollCallback(_window, scroll_callback);
+	glfwSetWindowSizeCallback(_window, window_resize_callback);
 
 	if (!_window)
 		return false;
 
-	return vulkan_backend::initialize();
+	return vulkan_backend::initialize(_window);
 }
 
 void Application::shutdown_internal()
@@ -58,6 +64,7 @@ void Application::run()
 	{
 		update();
 		render();
+		vulkan_backend::draw();
 	}
 
 	shutdown();
