@@ -31,3 +31,5 @@
 build/
 bin/
 lib/
+x64/
+x64/*
